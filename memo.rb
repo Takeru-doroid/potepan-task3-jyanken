@@ -13,8 +13,13 @@ puts "#{memo_type}" + "を選択"
 #(memo_typeをto_sで変換すると、うまく次処理が実行できなかった)
 if memo_type == 1
   puts "拡張子を除いたファイル名を入力してください"
-  #入力したファイル名を変数に文字列型として代入
-  file_name = gets.to_s
+  #入力したファイル名を変数に代入
+  #chompメソッドで改行コードを取り除く
+  file_name = gets.chomp
+  
+  #puts file_name
+  #(※chompメソッドを使用しない状態でも私の画面上では問題ありませんでした...)
+  #画面上でのファイル名の見方が違うのでしょうか？...
   
   puts "メモの内容を記入してください"
   puts "終了時には、Ctrl + Dを押してください"
@@ -33,7 +38,7 @@ if memo_type == 1
 elsif memo_type == 2
   puts "編集したいファイル名を拡張子を除いた状態で入力してください"
   #既存のファイル名(拡張子は除く)を取得
-  choice_file_name = gets.to_s
+  choice_file_name = gets.chomp
   
   puts "追記したい内容を入力してください"
   puts "終わったら、Ctrl + Dを押してください"
@@ -43,6 +48,7 @@ elsif memo_type == 2
   
   #書き込みモードから、既存ファイルに追記分を追加する
   CSV.open("#{choice_file_name}.csv","a") do |csv|
+    #csvに追記文を追加する
     csv << ["#{add_contents}"]
   end
   
