@@ -25,8 +25,8 @@ puts "じゃ〜んけ〜ん"
       return false
     end
     
+    
   end
-  
   
   #あいこの場合、じゃんけんメソッドをループ
   #re_jyanken にtrueを代入
@@ -39,8 +39,8 @@ puts "じゃ〜んけ〜ん"
 
 #==============================================================
 
-  #あっちむいてホイ============================================
-  #hoihoiメソッドを定義する
+#あっちむいてホイ==============================================
+#hoihoiメソッドを定義する
   
   def hoihoi
     puts "あっち向いて"
@@ -61,6 +61,7 @@ puts "じゃ〜んけ〜ん"
         return false
       else
         puts "もう一度"
+        $next_game = true
         return true
       end
       
@@ -76,6 +77,7 @@ puts "じゃ〜んけ〜ん"
         return false
       else
         puts "もう一度"
+        $next_game = true
         return true
       end
     end
@@ -83,21 +85,23 @@ puts "じゃ〜んけ〜ん"
   end
   
   #じゃんけんの勝敗からhoihoiメソッドへの移行
+  #一度目は目的の挙動をするが、2回目のループからじゃんけんメソッドに移行しない...
   
-  next_game = true
+  f1 = hoihoi
   
-  while hoihoi
-    while next_game
-      next_game = jyanken
-    end
+  loop do
+    jyanken
+    break if f1
   end
   
   
   
-  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+  while hoihoi
+    while $next_game
+      $next_game = jyanken
+    end
+  end
+  
   #============================================================
-
-
-
-
+  
+  
